@@ -1,8 +1,7 @@
 import sys
 # importing pygame module.
 import pygame as pg
-SCREEN_WIDTH = 1200
-SCREEN_HEIGHT = 800
+from settings import Settings
 
 
 # this is the class managing all the basic functionalities of the program.
@@ -11,12 +10,14 @@ class AlienInvasion:
     def __init__(self):
         # initialising all the pygame modules.
         pg.init()
+        # instance created from setting class.
+        self.settings = Settings()
         # setting up display screen
-        self.screen = pg.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+        self.screen = pg.display.set_mode((self.settings.screen_width, self.settings.screen_height))
         pg.display.set_caption("ALIEN INVASION")
 
         # defining an attribute storing bg color of screen.
-        self.bg_color = (150, 150, 150)
+        self.bg_color = self.settings.bg_color
 
     # main game loop.
     def run_game(self):
