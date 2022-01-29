@@ -11,6 +11,8 @@ class Ship:
         # assigning all the properties of game screen to ship screen therefore it can be accessed throughout
         # the program.
         self.screen = ai_game.screen
+        # assigning settings to the variable setting. settings of every instance is special for that ship.
+        self.settings = ai_game.settings
         # accessing the screen's rect attribute so that we can place our ship anywhere on the screen.
         self.screen_rect = ai_game.screen.get_rect()
         # .load, loads the targeted image and returns a surface representing that image.
@@ -20,7 +22,8 @@ class Ship:
         self.rect = self.image.get_rect()
 
         self.rect.midbottom = self.screen_rect.midbottom
-
+        # storing a decimal value for x coordinates of ship rect because pygame rect cannot store float value.
+        self.x = float(self.rect.x)
         # Right movement flag
         self.moving_right = False
 
@@ -28,10 +31,13 @@ class Ship:
         self.moving_left = False
 
     def update(self):
+        # updating the position on the basis of input.
         if self.moving_right:
-            self.rect.x += 1
+            self.x += self.settings.ship_speed
         if self.moving_left:
-            self.rect.x -= 1
+            self.x -= self.settings.ship_speed
+        # updating rect position to the new position.
+        self.rect.x = self.x
 
     def draw_me(self):
         # blit, draws the source on the surface at the specified position.
