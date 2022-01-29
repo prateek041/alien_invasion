@@ -26,22 +26,30 @@ class AlienInvasion:
     def run_game(self):
         # the surface returned by display.set mode is refreshed repeatedly by this loop.
         while True:
-            # this condition is used for clearing the event queue and "get" all the commands.
-            # An event is an action that the user performs while playing the game. moving mouse etc.
-            # to access the events we use .event which returns a list of events performed since this function
-            # was last.
-            for event in pg.event.get():
-                if event.type == pg.QUIT:
-                    sys.exit()
+            # for checking the events.
+            self._check_events()
+            # for updating screen.
+            self._update_screen()
 
-            # setting the background color to the previously saved attribute. fill, fills a particular surface with
-            # selected color.
-            self.screen.fill(self.bg_color)
+    # This is a helper method.
+    def _check_events(self):
+        # this condition is used for clearing the event queue and "get" all the commands.
+        # An event is an action that the user performs while playing the game. moving mouse etc.
+        # to access the events we use .event.get which returns a list of events performed since this function
+        # was last.
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                sys.exit()
 
-            # drawing the ship on the screen.
-            self.ship.draw_me()
-            # for refreshing the display screen i.e. to display the most recently drawn image.
-            pg.display.flip()
+    def _update_screen(self):
+        # setting the background color to the previously saved attribute. fill, fills a particular surface with
+        # selected color.
+        self.screen.fill(self.bg_color)
+
+        # drawing the ship on the screen.
+        self.ship.draw_me()
+        # for refreshing the display screen i.e. to display the most recently drawn image.
+        pg.display.flip()
 
 
 if __name__ == '__main__':
