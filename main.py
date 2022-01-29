@@ -28,6 +28,8 @@ class AlienInvasion:
         while True:
             # for checking the events.
             self._check_events()
+            # after  checking the event, movement details updated.
+            self.ship.update()
             # for updating screen.
             self._update_screen()
 
@@ -42,14 +44,15 @@ class AlienInvasion:
                 sys.exit()
             elif event.type == pg.KEYDOWN:
                 if event.key == pg.K_RIGHT:
-                    # move the ship to the right.
-                    self.ship.rect.x += 1
+                    self.ship.moving_right = True
+            elif event.type == pg.KEYUP:
+                if event.key == pg.K_RIGHT:
+                    self.ship.moving_right = False
 
     def _update_screen(self):
         # setting the background color to the previously saved attribute. fill, fills a particular surface with
         # selected color.
         self.screen.fill(self.bg_color)
-
         # drawing the ship on the screen.
         self.ship.draw_me()
         # for refreshing the display screen i.e. to display the most recently drawn image.

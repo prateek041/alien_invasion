@@ -21,6 +21,13 @@ class Ship:
 
         self.rect.midbottom = self.screen_rect.midbottom
 
+        # movement flag
+        self.moving_right = False
+
+    def update(self):
+        if self.moving_right:
+            self.rect.x += 1
+
     def draw_me(self):
         # blit, draws the source on the surface at the specified position.
         self.screen.blit(self.image, self.rect)
