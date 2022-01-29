@@ -16,6 +16,7 @@ class Ship:
         # .load, loads the targeted image and returns a surface representing that image.
         self.image = pg.image.load('images/ship.bmp')
         # accessing image's rect attribute so that we can use it later to place the ship.
+        # returns a new rectangle covering the entire surface.
         self.rect = self.image.get_rect()
 
         self.rect.midbottom = self.screen_rect.midbottom

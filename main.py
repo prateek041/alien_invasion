@@ -1,7 +1,7 @@
 import sys
-# importing pygame module.
 import pygame as pg
 from settings import Settings
+from ship import Ship
 
 
 # this is the class managing all the basic functionalities of the program.
@@ -15,6 +15,9 @@ class AlienInvasion:
         # setting up display screen
         self.screen = pg.display.set_mode((self.settings.screen_width, self.settings.screen_height))
         pg.display.set_caption("ALIEN INVASION")
+
+        # instance created from ship class.
+        self.ship = Ship(self)
 
         # defining an attribute storing bg color of screen.
         self.bg_color = self.settings.bg_color
@@ -30,9 +33,13 @@ class AlienInvasion:
             for event in pg.event.get():
                 if event.type == pg.QUIT:
                     sys.exit()
+
             # setting the background color to the previously saved attribute. fill, fills a particular surface with
             # selected color.
             self.screen.fill(self.bg_color)
+
+            # drawing the ship on the screen.
+            self.ship.draw_me()
             # for refreshing the display screen i.e. to display the most recently drawn image.
             pg.display.flip()
 
