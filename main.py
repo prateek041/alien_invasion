@@ -40,6 +40,10 @@ class AlienInvasion:
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 sys.exit()
+            elif event.type == pg.KEYDOWN:
+                if event.key == pg.K_RIGHT:
+                    # move the ship to the right.
+                    self.ship.rect.x += 1
 
     def _update_screen(self):
         # setting the background color to the previously saved attribute. fill, fills a particular surface with
