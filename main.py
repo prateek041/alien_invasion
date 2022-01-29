@@ -45,9 +45,13 @@ class AlienInvasion:
             elif event.type == pg.KEYDOWN:
                 if event.key == pg.K_RIGHT:
                     self.ship.moving_right = True
+                elif event.key == pg.K_LEFT:
+                    self.ship.moving_left = True
             elif event.type == pg.KEYUP:
                 if event.key == pg.K_RIGHT:
                     self.ship.moving_right = False
+                elif event.key == pg.K_LEFT:
+                    self.ship.moving_left = False
 
     def _update_screen(self):
         # setting the background color to the previously saved attribute. fill, fills a particular surface with

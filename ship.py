@@ -21,12 +21,17 @@ class Ship:
 
         self.rect.midbottom = self.screen_rect.midbottom
 
-        # movement flag
+        # Right movement flag
         self.moving_right = False
+
+        # left movement flag
+        self.moving_left = False
 
     def update(self):
         if self.moving_right:
             self.rect.x += 1
+        if self.moving_left:
+            self.rect.x -= 1
 
     def draw_me(self):
         # blit, draws the source on the surface at the specified position.
