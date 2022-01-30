@@ -16,3 +16,17 @@ class Bullet:
 
         # assigning midtop of ship as mitdop of bullets.
         self.rect.midtop = ai_game.ship.rect.midtop
+
+        # saving y cor of bullet in float form.
+        self.y = float(self.rect.y)
+
+    # for moving the bullet vertically on the screen.
+    def update(self):
+        # update decimal position of the bullet
+        self.y -= self.settings.bullet_speed
+        # updating the position of bullet rectangle.
+        self.rect.y = self.y
+
+    # drawing the bullet on the screen
+    def draw_bullet(self):
+        pg.draw.rect(self.screen, self.color, self.rect)
