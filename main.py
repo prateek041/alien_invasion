@@ -46,7 +46,7 @@ class AlienInvasion:
             self.ship.update()
 
             # for updating bullets group
-            self.bullets.update()
+            self._update_bullets()
 
             # for updating the screen
             self._update_screen()
@@ -94,6 +94,17 @@ class AlienInvasion:
             new_bullet = Bullet(self)
             self.bullets.add(new_bullet)
 
+    def _update_bullets(self):
+        # update positions of bullets and get rid of old bullets.
+        # update bullets positions.
+        self.bullets.update()
+
+        # get rid of bullets that have disappeared.
+        # we are using copy because we cannot remove a list item while the loop is running
+        for bullet in self.bullets.copy():
+            if bullet.rect.bottom <= 0:
+                self.bullets.remove(bullet)
+
     def _update_screen(self):
 
         # setting the background color to the previously saved attribute. fill, fills a particular surface with
@@ -107,12 +118,6 @@ class AlienInvasion:
         for bullet in self.bullets.sprites():
             # this red line because we have overridden sprite class by inheriting it.
             bullet.draw_bullet()
-
-        # we are using copy because we cannot remove a list item while the loop is running
-        for bullet in self.bullets.copy():
-            if bullet.rect.bottom <= 0:
-                self.bullets.remove(bullet)
-        # print(len(self.bullets))
 
         # for refreshing the display screen i.e. to display the most recently drawn image.
         pg.display.flip()
