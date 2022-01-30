@@ -39,6 +39,6 @@ class Ship:
         # updating rect position to the new position.
         self.rect.x = self.x
 
-    def draw_me(self):
+    def draw_ship(self):
         # blit, draws the source on the surface at the specified position.
         self.screen.blit(self.image, self.rect)

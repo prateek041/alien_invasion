@@ -72,7 +72,7 @@ class AlienInvasion:
         # selected color.
         self.screen.fill(self.bg_color)
         # drawing the ship on the screen.
-        self.ship.draw_me()
+        self.ship.draw_ship()
         # for refreshing the display screen i.e. to display the most recently drawn image.
         pg.display.flip()
 
