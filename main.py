@@ -6,15 +6,19 @@ from ship import Ship
 
 # this is the class managing all the basic functionalities of the program.
 class AlienInvasion:
+
     # self initialisation of the class
     def __init__(self):
         # initialising all the pygame modules.
         pg.init()
+
         # instance created from setting class.
         self.settings = Settings()
+
         # setting up display full screen.
         # passing (0,0) tells pygame to figure out screen size in runtime.
         self.screen = pg.display.set_mode((0, 0), pg.FULLSCREEN)
+
         # in the above line when the screen is created, setting are updated as per the screen size created.
         self.settings.screen_width = self.screen.get_rect().width
         self.settings.screen_height = self.screen.get_rect().height
@@ -22,6 +26,9 @@ class AlienInvasion:
 
         # instance created from ship class.
         self.ship = Ship(self)
+
+        # creating a group for storing fired bullets.
+        self.bullets = pg.sprite.Group()
 
         # defining an attribute storing bg color of screen.
         self.bg_color = self.settings.bg_color
@@ -32,13 +39,19 @@ class AlienInvasion:
         while True:
             # for checking the events.
             self._check_events()
+
             # after  checking the event, movement details updated. changing the ship's position.
             self.ship.update()
-            # for updating screen.
+
+            # for updating bullets group
+            self.bullets.update()
+
+            # for updating the screen
             self._update_screen()
 
     # This is a helper method.
     def _check_events(self):
+
         # this condition is used for clearing the event queue and "get" all the commands.
         # An event is an action that the user performs while playing the game. moving mouse etc.
         # to access the events we use .event.get which returns a list of events performed since this function
@@ -53,6 +66,7 @@ class AlienInvasion:
                 # checking which keyup event performed
                 self._check_keyup_events(event)
 
+    # for checking keydown events.
     def _check_keydown_events(self, event):
         if event.key == pg.K_RIGHT:
             self.ship.moving_right = True
@@ -61,6 +75,7 @@ class AlienInvasion:
         elif event.key == pg.K_q:
             sys.exit()
 
+    # for checking keyup events.
     def _check_keyup_events(self, event):
         if event.key == pg.K_RIGHT:
             self.ship.moving_right = False
@@ -68,15 +83,19 @@ class AlienInvasion:
             self.ship.moving_left = False
 
     def _update_screen(self):
+
         # setting the background color to the previously saved attribute. fill, fills a particular surface with
         # selected color.
         self.screen.fill(self.bg_color)
+
         # drawing the ship on the screen.
         self.ship.draw_ship()
+
         # for refreshing the display screen i.e. to display the most recently drawn image.
         pg.display.flip()
 
 
+# main
 if __name__ == '__main__':
     # make a game instance, run the game.
     ai = AlienInvasion()
