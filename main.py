@@ -88,8 +88,11 @@ class AlienInvasion:
 
     # creates a new bullet and adds it to the bullet group.
     def _fire_bullet(self):
-        new_bullet = Bullet(self)
-        self.bullets.add(new_bullet)
+
+        # checking for max allowed bullets in the game.
+        if len(self.bullets) < self.settings.bullets_allowed:
+            new_bullet = Bullet(self)
+            self.bullets.add(new_bullet)
 
     def _update_screen(self):
 
