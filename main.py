@@ -2,6 +2,7 @@ import sys
 import pygame as pg
 from settings import Settings
 from ship import Ship
+from bullet import Bullet
 
 
 # this is the class managing all the basic functionalities of the program.
@@ -74,6 +75,8 @@ class AlienInvasion:
             self.ship.moving_left = True
         elif event.key == pg.K_q:
             sys.exit()
+        elif event.key == pg.K_SPACE:
+            self._fire_bullet()
 
     # for checking keyup events.
     def _check_keyup_events(self, event):
@@ -81,6 +84,11 @@ class AlienInvasion:
             self.ship.moving_right = False
         elif event.key == pg.K_LEFT:
             self.ship.moving_left = False
+
+    # creates a new bullet and adds it to the bullet group.
+    def _fire_bullet(self):
+        new_bullet = Bullet(self)
+        self.bullets.add(new_bullet)
 
     def _update_screen(self):
 
@@ -90,6 +98,10 @@ class AlienInvasion:
 
         # drawing the ship on the screen.
         self.ship.draw_ship()
+
+        # draws the bullet on the screen
+        for bullet in self.bullets.sprites():
+            bullet.draw_bullet()
 
         # for refreshing the display screen i.e. to display the most recently drawn image.
         pg.display.flip()
