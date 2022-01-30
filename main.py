@@ -28,7 +28,8 @@ class AlienInvasion:
         # instance created from ship class.
         self.ship = Ship(self)
 
-        # creating a group for storing fired bullets.
+        # creating a group for storing fired bullets. Group is a class of pygame that behaves just like a list. we will
+        # store our fired bullets in this list.
         self.bullets = pg.sprite.Group()
 
         # defining an attribute storing bg color of screen.
@@ -101,7 +102,14 @@ class AlienInvasion:
 
         # draws the bullet on the screen
         for bullet in self.bullets.sprites():
+            # this red line because we have overridden sprite class by inheriting it.
             bullet.draw_bullet()
+
+        # we are using copy because we cannot remove a list item while the loop is running
+        for bullet in self.bullets.copy():
+            if bullet.rect.bottom <= 0:
+                self.bullets.remove(bullet)
+        # print(len(self.bullets))
 
         # for refreshing the display screen i.e. to display the most recently drawn image.
         pg.display.flip()
