@@ -12,8 +12,12 @@ class AlienInvasion:
         pg.init()
         # instance created from setting class.
         self.settings = Settings()
-        # setting up display screen
-        self.screen = pg.display.set_mode((self.settings.screen_width, self.settings.screen_height))
+        # setting up display full screen.
+        # passing (0,0) tells pygame to figure out screen size in runtime.
+        self.screen = pg.display.set_mode((0, 0), pg.FULLSCREEN)
+        # in the above line when the screen is created, setting are updated as per the screen size created.
+        self.settings.screen_width = self.screen.get_rect().width
+        self.settings.screen_height = self.screen.get_rect().height
         pg.display.set_caption("ALIEN INVASION")
 
         # instance created from ship class.
@@ -28,7 +32,7 @@ class AlienInvasion:
         while True:
             # for checking the events.
             self._check_events()
-            # after  checking the event, movement details updated.
+            # after  checking the event, movement details updated. changing the ship's position.
             self.ship.update()
             # for updating screen.
             self._update_screen()
@@ -54,6 +58,8 @@ class AlienInvasion:
             self.ship.moving_right = True
         elif event.key == pg.K_LEFT:
             self.ship.moving_left = True
+        elif event.key == pg.K_q:
+            sys.exit()
 
     def _check_keyup_events(self, event):
         if event.key == pg.K_RIGHT:
